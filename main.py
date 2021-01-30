@@ -138,9 +138,7 @@ def on_up_pressed():
 controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
 
 def on_overlap_tile(sprite, location):
-    jack.destroy(effects.spray, 2000)
     info.change_life_by(-1)
-    doSomething()
 scene.on_overlap_tile(SpriteKind.player,
     sprites.builtin.forest_tiles0,
     on_overlap_tile)
@@ -434,7 +432,7 @@ jumpcount = 0
 jack: Sprite = None
 scene.set_background_color(9)
 tiles.set_tilemap(tilemap("""
-    level1
+    level4
 """))
 jack = sprites.create(assets.image("""
     image
