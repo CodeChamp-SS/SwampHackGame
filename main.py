@@ -182,5 +182,5 @@ def on_update_interval2():
     stone = sprites.create_projectile_from_side(assets.image("""
         image14
     """), 0, 55)
-    stone.x = hacker.x
+    stone.x = hacker.x + 5
 game.on_update_interval(5000, on_update_interval2)
