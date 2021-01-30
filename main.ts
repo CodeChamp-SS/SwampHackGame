@@ -1,3 +1,6 @@
+scene.onHitWall(SpriteKind.Player, function (sprite, location) {
+	
+})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     jack,
@@ -531,6 +534,9 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     100,
     false
     )
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`transparency16`, function (sprite, location) {
+	
 })
 let jumpcount = 0
 let jack: Sprite = null
