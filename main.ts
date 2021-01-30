@@ -401,9 +401,17 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     false
     )
 })
-info.onLifeZero(function () {
-    game.over(false)
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
+    coll1.destroy()
+    info.changeLifeBy(-1)
 })
+info.onLifeZero(function () {
+    game.over(false, effects.confetti)
+})
+scene.onHitWall(SpriteKind.Projectile, function (sprite, location) {
+    coll1.destroy(effects.ashes, 100)
+})
+let coll1: Sprite = null
 let jumpcount = 0
 let jack: Sprite = null
 scene.setBackgroundColor(9)
@@ -414,3 +422,26 @@ controller.moveSprite(jack, 100, 0)
 info.setLife(3)
 jack.ay = 250
 scene.cameraFollowSprite(jack)
+game.onUpdateInterval(2000, function () {
+    if (game.runtime() > 3000) {
+        coll1 = sprites.createProjectileFromSide(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . 4 4 . . . . . . . 
+            . . . . . . . 4 5 4 . . . . . . 
+            . . . . . . 4 5 5 4 4 . . . . . 
+            . . . . . 4 4 5 5 5 4 . . . . . 
+            . . . . 4 4 5 5 5 5 4 4 . . . . 
+            . . . 4 4 5 5 5 5 5 5 4 . . . . 
+            . . . 4 5 5 5 5 5 5 5 5 4 . . . 
+            . . . 4 5 5 5 5 5 5 5 5 4 4 . . 
+            . . . 4 4 5 5 5 5 5 5 5 5 5 . . 
+            . . . . 4 4 4 5 5 5 5 5 4 . . . 
+            . . . . . . 4 4 4 4 4 4 . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, -39, 50)
+        coll1.setPosition(jack.x + 50, jack.y - 50)
+    }
+})

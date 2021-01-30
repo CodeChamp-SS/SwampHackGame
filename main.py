@@ -138,14 +138,8 @@ def on_up_pressed():
 controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
 
 def on_overlap_tile(sprite, location):
-    info.change_life_by(-1)
-scene.on_overlap_tile(SpriteKind.player,
-    sprites.builtin.forest_tiles0,
-    on_overlap_tile)
-
-def on_overlap_tile2(sprite, location):
     game.over(True)
-scene.on_overlap_tile(SpriteKind.player, sprites.builtin.brick, on_overlap_tile2)
+scene.on_overlap_tile(SpriteKind.player, sprites.builtin.brick, on_overlap_tile)
 
 def on_left_pressed():
     animation.run_image_animation(jack,
@@ -411,29 +405,30 @@ def on_right_pressed():
         False)
 controller.right.on_event(ControllerButtonEvent.PRESSED, on_right_pressed)
 
-def doSomething():
-    global jack
-    jack = sprites.create(assets.image("""
-        image
-    """), SpriteKind.player)
-    controller.move_sprite(jack, 100, 0)
-    scene.set_background_color(9)
-    tiles.set_tilemap(tilemap("""
-        level1
-    """))
-    jack.ay = 250
-    scene.camera_follow_sprite(jack)
-
 def on_life_zero():
     game.over(False)
 info.on_life_zero(on_life_zero)
 
+def on_hit_wall(sprite, location):
+    coll1.destroy(effects.ashes, 100)
+scene.on_hit_wall(SpriteKind.projectile, on_hit_wall)
+
+def on_overlap_tile2(sprite, location):
+    pass
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        transparency16
+    """),
+    on_overlap_tile2)
+
+coll1: Sprite = None
 jumpcount = 0
 jack: Sprite = None
 scene.set_background_color(9)
 tiles.set_tilemap(tilemap("""
     level4
 """))
+info.set_score(0)
 jack = sprites.create(assets.image("""
     image
 """), SpriteKind.player)
@@ -441,3 +436,29 @@ controller.move_sprite(jack, 100, 0)
 info.set_life(3)
 jack.ay = 250
 scene.camera_follow_sprite(jack)
+
+def on_update_interval():
+    global coll1
+    if game.runtime() > 3000:
+        coll1 = sprites.create_projectile_from_side(img("""
+                . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . 4 4 . . . . . . . 
+                            . . . . . . . 4 5 4 . . . . . . 
+                            . . . . . . 4 5 5 4 4 . . . . . 
+                            . . . . . 4 4 5 5 5 4 . . . . . 
+                            . . . . 4 4 5 5 5 5 4 4 . . . . 
+                            . . . 4 4 5 5 5 5 5 5 4 . . . . 
+                            . . . 4 5 5 5 5 5 5 5 5 4 . . . 
+                            . . . 4 5 5 5 5 5 5 5 5 4 4 . . 
+                            . . . 4 4 5 5 5 5 5 5 5 5 5 . . 
+                            . . . . 4 4 4 5 5 5 5 5 4 . . . 
+                            . . . . . . 4 4 4 4 4 4 . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . .
+            """),
+            -39,
+            50)
+        coll1.set_position(jack.x + 50, jack.y - 50)
+game.on_update_interval(2000, on_update_interval)
