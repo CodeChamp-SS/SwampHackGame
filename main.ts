@@ -6,6 +6,21 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         hacker.vy = -120
         cnt += 2
     }
+    if (hacker.vx > 0) {
+        animation.runImageAnimation(
+        hacker,
+        assets.animation`left jump animation`,
+        200,
+        false
+        )
+    } else {
+        animation.runImageAnimation(
+        hacker,
+        assets.animation`right jump animation`,
+        200,
+        false
+        )
+    }
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     hacker.setImage(assets.image`Temporary asset3`)
@@ -13,11 +28,8 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     hacker.setImage(assets.image`Temporary asset2`)
 })
-scene.onHitWall(SpriteKind.Projectile, function (sprite, location) {
-    stone.destroy(effects.disintegrate, 200)
-})
-let projectile: Sprite = null
 let stone: Sprite = null
+let projectile: Sprite = null
 let cnt = 0
 let hacker: Sprite = null
 scene.setBackgroundImage(img`
@@ -153,7 +165,7 @@ scene.cameraFollowSprite(hacker)
 // hacker.vy = 0
 game.onUpdate(function () {
     if (hacker.y < 50) {
-        hacker.vy = 30
+        hacker.vy = 50
         hacker.ay = 150
     } else if (hacker.y <= 90) {
         hacker.ay = 150
