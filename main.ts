@@ -254,8 +254,19 @@ hacker,
 500,
 true
 )
-hacker.setPosition(40, 80)
+hacker.setPosition(40, 90)
 hacker.ay = 80
+game.onUpdate(function () {
+    if (hacker.y < 20) {
+        hacker.vy = 10
+        hacker.ay = 100
+    } else if (hacker.y <= 90) {
+        hacker.ay = 100
+    } else {
+        hacker.ay = 0
+        hacker.vy = 0
+    }
+})
 game.onUpdateInterval(3000, function () {
     projectile = sprites.createProjectileFromSide(img`
         ...........fffffff...ccfff..........
