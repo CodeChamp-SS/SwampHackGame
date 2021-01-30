@@ -27,17 +27,17 @@
         "tilemapTile": true,
         "displayName": "tile5"
     },
-    "tile5": {
-        "data": "hwQQABAAAAAA8PAADw9wd/AADwDwAPB3AP//8PDwd3fwf/d/f3d3d/9/d/d/93d/cH9/93d/d3fwd3d/93d/d//393d39/d3f3d3f393d3dwf393f3/3f3B3d/d3d/d38Hd3f/f3d3fw939/d3d3dw8PDw8AD393AA8P8AAP8HfwAPAA8PBwdw==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true,
-        "displayName": "cactus"
-    },
     "tile6": {
-        "data": "hwQQABAAAAAAUCVVIlUiggBQIkUiJSKCAFVFQlIlIoJQRSRCVCIiglBEJCJEVSKCAAAkVFUlIoIAQCRUIiIiggBAIkIiIiKCAEBEIkQiUoIAAEUiRCIiggBVJSJSIiKCVVUiQlUiUoJQUiVUJSIiggBVQlIiIiKCAFBFUlUiIoIAACVEUiIigg==",
+        "data": "hwQQABAAAAAAAAAAAAAiAAAAAAAgJCICAABQRVIkIiIAVVVCVCIi7lBVJSJEVeLiAEAlVFUlIiUAUCRUIiIi4gBAIkIiIiIuAEBEIkQiUuIAAEUiRCIiIgBVJSJSIiIuVVUiQlUiUuIAUCVUJSIi7gAAAFIiIiIuAAAAAEAiIgIAAAAAACAiAA==",
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true,
         "displayName": "fire"
+    },
+    "tile5": {
+        "data": "hwQQABAAAAAADwAAAA8AAPAAD/DwAPBwAA//8PDwd3fwf/d3f3d3d393d/d393d/cH9/d3d3d3fwd3d/93d/d//393d39/d3f3d3f393d3dwf393d393f3B3d/d3d/d38Hd3f/f3d3fw939/d3d3dw8PDw8AD393AA8P8AAP8HAAAAAA8PAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "cactus"
     },
     "level2": {
         "id": "level2",

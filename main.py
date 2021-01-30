@@ -6,6 +6,20 @@ def on_up_pressed():
     elif cnt == 1:
         hacker.vy = -120
         cnt += 2
+    if hacker.vx < 0:
+        animation.run_image_animation(hacker,
+            assets.animation("""
+                left jump animation
+            """),
+            300,
+            False)
+    else:
+        animation.run_image_animation(hacker,
+            assets.animation("""
+                right jump animation
+            """),
+            300,
+            False)
 controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
 
 def on_left_pressed():
@@ -20,8 +34,8 @@ def on_right_pressed():
     """))
 controller.right.on_event(ControllerButtonEvent.PRESSED, on_right_pressed)
 
-stone: Sprite = None
 projectile: Sprite = None
+stone: Sprite = None
 cnt = 0
 hacker: Sprite = None
 scene.set_background_image(img("""
@@ -170,17 +184,17 @@ def on_on_update():
 game.on_update(on_on_update)
 
 def on_update_interval():
+    global stone
+    stone = sprites.create_projectile_from_side(assets.image("""
+        cactus_img
+    """), 0, 55)
+    stone.x = hacker.x + 5
+game.on_update_interval(5000, on_update_interval)
+
+def on_update_interval2():
     global projectile
     projectile = sprites.create_projectile_from_side(assets.image("""
         smartCloud
     """), -19, 0)
     projectile.y = 50
-game.on_update_interval(5000, on_update_interval)
-
-def on_update_interval2():
-    global stone
-    stone = sprites.create_projectile_from_side(assets.image("""
-        image14
-    """), 0, 55)
-    stone.x = hacker.x + 5
 game.on_update_interval(5000, on_update_interval2)
