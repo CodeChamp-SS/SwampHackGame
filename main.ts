@@ -267,6 +267,10 @@ game.onUpdate(function () {
         hacker.vy = 0
     }
 })
+game.onUpdateInterval(5000, function () {
+    projectile = sprites.createProjectileFromSide(assets.image`smartCloud`, -19, 0)
+    projectile.y = 20
+})
 game.onUpdateInterval(3000, function () {
     projectile = sprites.createProjectileFromSide(img`
         ...........fffffff...ccfff..........
