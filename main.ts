@@ -3,7 +3,9 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 let cherryTree: Sprite = null
 let hacker: Sprite = null
-scene.setBackgroundImage(assets.image`backImage`)
+scene.setBackgroundImage(img`
+    a e 3 . a 7 e b a c a 7 e 
+    `)
 hacker = sprites.create(assets.image`Temporary asset`, SpriteKind.Player)
 animation.runImageAnimation(
 hacker,
@@ -137,7 +139,9 @@ hacker.setPosition(18, 35)
 hacker.ay = 80
 hacker.setStayInScreen(true)
 game.onUpdateInterval(3000, function () {
-    cherryTree = sprites.create(assets.image`cherryTree`, SpriteKind.Projectile)
+    cherryTree = sprites.create(img`
+        a e 3 . a 7 e c e 2 e e 
+        `, SpriteKind.Projectile)
     cherryTree.x = 200
     cherryTree.y = 55
     cherryTree.setVelocity(-50, 0)
