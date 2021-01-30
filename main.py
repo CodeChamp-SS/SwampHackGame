@@ -138,9 +138,9 @@ def on_up_pressed():
 controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
 
 def on_overlap_tile(sprite, location):
-    jack.destroy(effects.spray, 500)
+    jack.destroy(effects.spray, 2000)
     info.change_life_by(-1)
-    jack.set_position(14, 0)
+    doSomething()
 scene.on_overlap_tile(SpriteKind.player,
     sprites.builtin.forest_tiles0,
     on_overlap_tile)
@@ -414,8 +414,17 @@ def on_right_pressed():
 controller.right.on_event(ControllerButtonEvent.PRESSED, on_right_pressed)
 
 def doSomething():
-    pass
-    
+    global jack
+    jack = sprites.create(assets.image("""
+        image
+    """), SpriteKind.player)
+    controller.move_sprite(jack, 100, 0)
+    scene.set_background_color(9)
+    tiles.set_tilemap(tilemap("""
+        level1
+    """))
+    jack.ay = 250
+    scene.camera_follow_sprite(jack)
 
 def on_life_zero():
     game.over(False)
@@ -423,14 +432,14 @@ info.on_life_zero(on_life_zero)
 
 jumpcount = 0
 jack: Sprite = None
-jack = sprites.create(assets.image("""
-    image
-"""), SpriteKind.player)
-info.set_life(3)
-controller.move_sprite(jack, 100, 0)
 scene.set_background_color(9)
 tiles.set_tilemap(tilemap("""
     level1
 """))
+jack = sprites.create(assets.image("""
+    image
+"""), SpriteKind.player)
+controller.move_sprite(jack, 100, 0)
+info.set_life(3)
 jack.ay = 250
 scene.camera_follow_sprite(jack)

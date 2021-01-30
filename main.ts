@@ -137,7 +137,7 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.builtin.forestTiles0, function (sprite, location) {
-    jack.destroy(effects.spray, 500)
+    jack.destroy(effects.spray, 2000)
     info.changeLifeBy(-1)
     doSomething()
 })
@@ -419,10 +419,10 @@ info.onLifeZero(function () {
 })
 let jumpcount = 0
 let jack: Sprite = null
-jack = sprites.create(assets.image`image`, SpriteKind.Player)
-info.setLife(3)
-controller.moveSprite(jack, 100, 0)
 scene.setBackgroundColor(9)
 tiles.setTilemap(tilemap`level1`)
+jack = sprites.create(assets.image`image`, SpriteKind.Player)
+controller.moveSprite(jack, 100, 0)
+info.setLife(3)
 jack.ay = 250
 scene.cameraFollowSprite(jack)
