@@ -129,6 +129,7 @@ scene.set_background_image(img("""
 hacker = sprites.create(assets.image("""
     Temporary asset
 """), SpriteKind.player)
+scene.camera_follow_sprite(hacker)
 animation.run_image_animation(hacker,
     [img("""
             ............................................................
@@ -258,19 +259,30 @@ animation.run_image_animation(hacker,
     True)
 hacker.set_position(40, 90)
 hacker.ay = 80
+tiles.set_tilemap(tilemap("""
+    level1
+"""))
 
 def on_on_update():
-    if(hacker.y < 20):
+    if hacker.y < 20:
         hacker.vy = 10
         hacker.ay = 100
     elif hacker.y <= 90:
         hacker.ay = 100
-    else:
-        hacker.ay = 0
-        hacker.vy = 0
+    # else:
+    #     hacker.ay = 0
+    #     hacker.vy = 0
 game.on_update(on_on_update)
 
 def on_update_interval():
+    global projectile
+    projectile = sprites.create_projectile_from_side(assets.image("""
+        smartCloud
+    """), -19, 0)
+    projectile.y = 20
+game.on_update_interval(5000, on_update_interval)
+
+def on_update_interval2():
     global projectile
     projectile = sprites.create_projectile_from_side(img("""
             ...........fffffff...ccfff..........
@@ -293,4 +305,4 @@ def on_update_interval():
         -100,
         0)
     projectile.y = 80
-game.on_update_interval(3000, on_update_interval)
+game.on_update_interval(3000, on_update_interval2)
