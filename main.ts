@@ -1,11 +1,10 @@
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     hacker.vx = -60
 })
+let smartCloud: Sprite = null
 let cherryTree: Sprite = null
 let hacker: Sprite = null
-scene.setBackgroundImage(img`
-    a e 3 . a 7 e b a c a 7 e 
-    `)
+scene.setBackgroundImage(assets.image`backImage`)
 hacker = sprites.create(assets.image`Temporary asset`, SpriteKind.Player)
 animation.runImageAnimation(
 hacker,
@@ -139,10 +138,13 @@ hacker.setPosition(18, 35)
 hacker.ay = 80
 hacker.setStayInScreen(true)
 game.onUpdateInterval(3000, function () {
-    cherryTree = sprites.create(img`
-        a e 3 . a 7 e c e 2 e e 
-        `, SpriteKind.Projectile)
+    cherryTree = sprites.create(assets.image`cherryTree`, SpriteKind.Projectile)
     cherryTree.x = 200
     cherryTree.y = 55
     cherryTree.setVelocity(-50, 0)
+})
+game.onUpdateInterval(10000, function () {
+    smartCloud = sprites.create(assets.image`smartCloud`, SpriteKind.Projectile)
+    smartCloud.setPosition(150, 25)
+    smartCloud.setVelocity(-6, 0)
 })
