@@ -718,6 +718,25 @@ dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
 `;
+            case "image13":
+            case "image14":return img`
+. . . . a a a a a a a . . . . . 
+. . a a e b b b b e e a a e . . 
+. a e e e b b b e e e e e a e . 
+. a e b b b b b 2 e e e e a e . 
+e e e b b b b b e e e e e e a e 
+a e 2 b b b b b 2 e e e e e a e 
+a e e b b b b b e e e e e e a e 
+a e 2 b b b b b b a a e e a a e 
+a e e e b b b b b b b b b b a e 
+a e e 2 b b b b b b b b b b a e 
+a e e e e 2 e 2 e b b b b b e . 
+e a e e e e e e e b b b b a e . 
+. a 2 e e e e e e b b b b a e . 
+. e a a 2 e 2 e 2 b b a a e e . 
+. . e e a a a a e e 2 e e e . . 
+. . e e e e e e e e e e e . . . 
+`;
         }
         return null;
     })
