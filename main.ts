@@ -2,15 +2,10 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     hacker.vy = -80
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    hacker,
-    assets.animation`walking0`,
-    200,
-    false
-    )
+    hacker.setImage(assets.image`Temporary asset3`)
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-	
+    hacker.setImage(assets.image`Temporary asset2`)
 })
 let projectile: Sprite = null
 let hacker: Sprite = null
@@ -138,7 +133,7 @@ scene.setBackgroundImage(img`
     `)
 hacker = sprites.create(assets.image`Temporary asset2`, SpriteKind.Player)
 hacker.setPosition(40, 90)
-controller.moveSprite(hacker, 100, 0)
+controller.moveSprite(hacker, 80, 0)
 hacker.ay = 80
 tiles.setTilemap(tilemap`level1`)
 scene.cameraFollowSprite(hacker)
@@ -146,7 +141,7 @@ scene.cameraFollowSprite(hacker)
 // hacker.ay = 0
 // hacker.vy = 0
 game.onUpdate(function () {
-    if (hacker.y < 20) {
+    if (hacker.y < 50) {
         hacker.vy = 10
         hacker.ay = 100
     } else if (hacker.y <= 90) {
