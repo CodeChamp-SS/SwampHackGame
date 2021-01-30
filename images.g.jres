@@ -34,6 +34,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "new assets"
     },
+    "image8": {
+        "data": "hwQMAAwAAAAAAO7uAAAAAACq7u7gAAAAoO4uDu4OAACgvruwLu4AAOq+C7C77gAAAAsLCwsCAAAKAAAAAAAAALoAsACwAgAAsA4uvgDuAACg6u6uC+AAAACq6q7uAAAAAADu7g4AAAA=",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "image"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",
