@@ -20,6 +20,7 @@ def on_right_pressed():
     """))
 controller.right.on_event(ControllerButtonEvent.PRESSED, on_right_pressed)
 
+stone: Sprite = None
 projectile: Sprite = None
 cnt = 0
 hacker: Sprite = None
@@ -175,3 +176,11 @@ def on_update_interval():
     """), -19, 0)
     projectile.y = 50
 game.on_update_interval(5000, on_update_interval)
+
+def on_update_interval2():
+    global stone
+    stone = sprites.create_projectile_from_side(assets.image("""
+        image14
+    """), 0, 55)
+    stone.x = hacker.x
+game.on_update_interval(5000, on_update_interval2)

@@ -7,6 +7,9 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         cnt += 2
     }
 })
+scene.onOverlapTile(SpriteKind.Projectile, sprites.castle.tilePath2, function (sprite, location) {
+    stone.destroy(effects.disintegrate, 500)
+})
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     hacker.setImage(assets.image`Temporary asset3`)
 })
@@ -14,6 +17,7 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     hacker.setImage(assets.image`Temporary asset2`)
 })
 let projectile: Sprite = null
+let stone: Sprite = null
 let cnt = 0
 let hacker: Sprite = null
 scene.setBackgroundImage(img`
@@ -158,4 +162,8 @@ game.onUpdate(function () {
 game.onUpdateInterval(5000, function () {
     projectile = sprites.createProjectileFromSide(assets.image`smartCloud`, -19, 0)
     projectile.y = 50
+})
+game.onUpdateInterval(5000, function () {
+    stone = sprites.createProjectileFromSide(assets.image`stone_img`, 0, 81)
+    stone.x = hacker.x
 })
