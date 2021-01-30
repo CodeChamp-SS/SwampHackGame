@@ -6,6 +6,8 @@ namespace myTiles {
     export const tile2 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const transparency16 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile3 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tile", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -14,6 +16,8 @@ namespace myTiles {
             case "cactus":
             case "tile2":return tile2;
             case "transparency16":return transparency16;
+            case "tile":
+            case "tile3":return tile3;
         }
         return null;
     })
