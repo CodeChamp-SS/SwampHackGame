@@ -145,7 +145,7 @@ scene.setBackgroundImage(img`
 hacker = sprites.create(assets.image`Temporary asset2`, SpriteKind.Player)
 hacker.setPosition(40, 90)
 controller.moveSprite(hacker, 80, 0)
-hacker.ay = 120
+hacker.ay = 150
 tiles.setTilemap(tilemap`level1`)
 scene.cameraFollowSprite(hacker)
 // else:
@@ -153,10 +153,10 @@ scene.cameraFollowSprite(hacker)
 // hacker.vy = 0
 game.onUpdate(function () {
     if (hacker.y < 50) {
-        hacker.vy = 10
-        hacker.ay = 120
+        hacker.vy = 30
+        hacker.ay = 150
     } else if (hacker.y <= 90) {
-        hacker.ay = 120
+        hacker.ay = 150
     }
 })
 game.onUpdateInterval(5000, function () {
