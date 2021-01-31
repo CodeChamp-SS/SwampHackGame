@@ -35,8 +35,8 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     hacker.setImage(assets.image`Temporary asset2`)
 })
-let stone: Sprite = null
 let projectile: Sprite = null
+let stone: Sprite = null
 let cnt = 0
 let coin: Sprite = null
 let hacker: Sprite = null
@@ -185,10 +185,10 @@ game.onUpdate(function () {
     }
 })
 game.onUpdateInterval(5000, function () {
-    projectile = sprites.createProjectileFromSide(assets.image`smartCloud`, -19, 0)
-    projectile.y = 50
-})
-game.onUpdateInterval(5000, function () {
     stone = sprites.createProjectileFromSide(assets.image`stone_img`, 0, 55)
     stone.x = hacker.x + 5
+})
+game.onUpdateInterval(5000, function () {
+    projectile = sprites.createProjectileFromSide(assets.image`smartCloud`, -19, 0)
+    projectile.y = 50
 })
