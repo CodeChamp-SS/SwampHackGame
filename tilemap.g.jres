@@ -39,12 +39,6 @@
         "tilemapTile": true,
         "displayName": "tileCoin"
     },
-    "tile2": {
-        "data": "hwQQABAAAAAAAAAAAEACAAAAAAAAREIiAAAAAEBVVUIAAAAAUCVCJAAAAAAAREIlAAAAAABAJFUAAAAAJSIkRQAAAAAgQlQiAAAAAABVRCIAAAAAAFBEJAAAAABQVSRCAAAAAFVCVCIAAAAAVUQiJAAAAABQJSIiAAAAAEQlIiQAAAAAAFUCAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true,
-        "displayName": "fireTop"
-    },
     "tile6": {
         "data": "hwQQABAAAAAiUiVVIlUigiJSIkUiJSKCIlVFQlIlIoJSRSRCVCIiglVEJCJEVSKCIiIkVFUlIoIiQiRUIiIigiJCIkIiIiKCIkJEIkQiUoIiIkUiRCIigiJVJSJSIiKCVVUiQlUiUoJSUiVUJSIigiJVQlIiIiKCIlJFUlUiIoIiIiVEUiIigg==",
         "mimeType": "image/x-mkcd-f4",
@@ -56,6 +50,12 @@
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true,
         "displayName": "cloudTile"
+    },
+    "tile2": {
+        "data": "hwQQABAAAAAAAAAAAEACAAAAAAAAREIiAAAAAEBVVUIAAAAAUCVCJAAAAAAAREIlAAAAAABAJFUAAAAAJSIkRQAAAAAgQlQiAAAAAABVRCIAAAAAAFBEJAAAAABQVSRCAAAAAFVCVCIAAAAAVUQiJAAAAABQJSIiAAAAAEQlIiQAAAAAAFUCAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "fireTop"
     },
     "level2": {
         "id": "level2",

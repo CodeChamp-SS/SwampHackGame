@@ -5,6 +5,7 @@ namespace SpriteKind {
     export const Coin = SpriteKind.create()
     export const LifeBonus = SpriteKind.create()
     export const finish = SpriteKind.create()
+    export const Fire = SpriteKind.create()
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.LifeBonus, function (sprite, otherSprite) {
     info.changeLifeBy(1)
@@ -83,6 +84,7 @@ let fireball: Sprite = null
 let dir2 = 0
 let cnt = 0
 let lifeBonus: Sprite = null
+let fire: Sprite = null
 let coin: Sprite = null
 let healthbar: StatusBarSprite = null
 let hacker: Sprite = null
@@ -232,6 +234,19 @@ for (let value of tiles.getTilesByType(assets.tile`tileCoin`)) {
     true
     )
     tiles.placeOnTile(coin, value)
+    tiles.setTileAt(value, assets.tile`transparency16`)
+}
+for (let value of tiles.getTilesByType(assets.tile`fireTop`)) {
+    fire = sprites.create(img`
+        a e 3 . a 7 e f e 2 c 
+        `, SpriteKind.Fire)
+    animation.runImageAnimation(
+    fire,
+    assets.animation`fireAnim`,
+    20,
+    true
+    )
+    tiles.placeOnTile(fire, value)
     tiles.setTileAt(value, assets.tile`transparency16`)
 }
 for (let value2 of tiles.getTilesByType(assets.tile`tileLife`)) {
