@@ -65,8 +65,6 @@ let statusbar: StatusBarSprite = null
 let jack: Sprite = null
 tiles.setTilemap(tilemap`level4`)
 scene.setBackgroundColor(9)
-let test1 = sprites.create(assets.image`image8`, SpriteKind.Food)
-test1.setPosition(44, 16)
 info.setScore(1000)
 jack = sprites.create(assets.image`image6`, SpriteKind.Player)
 controller.moveSprite(jack, 100, 0)
