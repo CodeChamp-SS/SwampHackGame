@@ -1,6 +1,8 @@
 namespace SpriteKind {
     export const FireKind = SpriteKind.create()
     export const StoneKind = SpriteKind.create()
+    export const board = SpriteKind.create()
+    export const Coin = SpriteKind.create()
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (hacker.vy == 0) {
@@ -59,7 +61,10 @@ let diff = 0
 let projectile: Sprite = null
 let fireball: Sprite = null
 let cnt = 0
+let coin: Sprite = null
 let hacker: Sprite = null
+let mangoTree = sprites.create(assets.image`mangoTree`, SpriteKind.board)
+mangoTree.setPosition(80, 185)
 let healthbar : StatusBarSprite = null
 let stone : Sprite = null
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, on_on_overlap)
@@ -202,6 +207,34 @@ scene.cameraFollowSprite(hacker)
 healthbar = statusbars.create(25, 4, StatusBarKind.Health)
 healthbar.setPosition(14, 15)
 healthbar.max = 100
+for (let value of tiles.getTilesByType(assets.tile`tileCoin`)) {
+    coin = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Coin)
+    animation.runImageAnimation(
+    coin,
+    assets.animation`coinAnima`,
+    50,
+    true
+    )
+    tiles.placeOnTile(coin, value)
+    tiles.setTileAt(value, assets.tile`transparency16`)
+}
 // else:
 // hacker.ay = 0
 // hacker.vy = 0
