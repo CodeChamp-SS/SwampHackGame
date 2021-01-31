@@ -9,6 +9,7 @@ namespace SpriteKind {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.LifeBonus, function (sprite, otherSprite) {
     info.changeLifeBy(1)
     otherSprite.destroy(effects.trail, 50)
+    music.magicWand.play()
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     music.jumpUp.play()
