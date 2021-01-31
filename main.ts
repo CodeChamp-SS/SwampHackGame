@@ -11,6 +11,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.LifeBonus, function (sprite, oth
     otherSprite.destroy(effects.trail, 50)
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+    music.jumpUp.play()
+    music.setVolume(10)
     if (hacker.vy == 0) {
         hacker.vy = -135
         cnt = 1
@@ -18,7 +20,7 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         hacker.vy = -135
         cnt += 2
     }
-    if (hacker.vx > 0) {
+    if (dir == 0) {
         animation.runImageAnimation(
         hacker,
         assets.animation`left jump animation`,
@@ -40,8 +42,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.finish, function (sprite, otherS
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Coin, function (sprite, otherSprite) {
     info.changeScoreBy(10)
     otherSprite.destroy(effects.trail, 50)
+    music.baDing.play()
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    dir = 0
     hacker.setImage(assets.image`Temporary asset3`)
 })
 statusbars.onZero(StatusBarKind.Health, function (status) {
@@ -50,10 +54,12 @@ statusbars.onZero(StatusBarKind.Health, function (status) {
     healthbar.value = 100
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    dir = 1
     hacker.setImage(assets.image`Temporary asset2`)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`cactus`, function (sprite, location) {
     healthbar.value += -0.05
+    scene.cameraShake(4, 200)
 })
 info.onLifeZero(function () {
     game.over(false, effects.melt)
@@ -73,6 +79,7 @@ let curScore = 0
 let diff = 0
 let projectile: Sprite = null
 let fireball: Sprite = null
+let dir = 0
 let cnt = 0
 let lifeBonus: Sprite = null
 let coin: Sprite = null
