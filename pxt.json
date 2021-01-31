@@ -2,8 +2,7 @@
     "name": "SwampHackGame",
     "description": "",
     "dependencies": {
-        "device": "*",
-        "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.4.0"
+        "device": "*"
     },
     "files": [
         "main.blocks",
