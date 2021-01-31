@@ -1,3 +1,6 @@
+namespace SpriteKind {
+    export const Coin = SpriteKind.create()
+}
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (hacker.vy == 0) {
         hacker.vy = -120
@@ -22,6 +25,10 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         )
     }
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Coin, function (sprite, otherSprite) {
+    info.changeScoreBy(5)
+    otherSprite.destroy(effects.trail, 100)
+})
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     hacker.setImage(assets.image`Temporary asset3`)
 })
@@ -31,6 +38,7 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 let stone: Sprite = null
 let projectile: Sprite = null
 let cnt = 0
+let coin: Sprite = null
 let hacker: Sprite = null
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -160,6 +168,11 @@ controller.moveSprite(hacker, 80, 0)
 hacker.ay = 150
 tiles.setTilemap(tilemap`level1`)
 scene.cameraFollowSprite(hacker)
+for (let value of tiles.getTilesByType(assets.tile`tileCoinRepl`)) {
+    coin = sprites.create(assets.image`coin`, SpriteKind.Coin)
+    tiles.placeOnTile(coin, value)
+    tiles.setTileAt(value, assets.tile`transparency16`)
+}
 // else:
 // hacker.ay = 0
 // hacker.vy = 0
