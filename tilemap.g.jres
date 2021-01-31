@@ -29,7 +29,8 @@
         "tileset": [
             "myTiles.transparency16",
             "sprites.castle.tilePath1",
-            "sprites.builtin.brick"
+            "sprites.builtin.brick",
+            "myTiles.tile1"
         ],
         "displayName": "level4"
     },
