@@ -1,24 +1,29 @@
+@namespace
+class SpriteKind:
+    FireKind = SpriteKind.create()
+    StoneKind = SpriteKind.create()
+
 def on_up_pressed():
     global cnt
     if hacker.vy == 0:
-        hacker.vy = -120
+        hacker.vy = -135
         cnt = 1
     elif cnt == 1:
-        hacker.vy = -120
+        hacker.vy = -135
         cnt += 2
-    if hacker.vx < 0:
+    if hacker.vx > 0:
         animation.run_image_animation(hacker,
             assets.animation("""
                 left jump animation
             """),
-            300,
+            200,
             False)
     else:
         animation.run_image_animation(hacker,
             assets.animation("""
                 right jump animation
             """),
-            300,
+            200,
             False)
 controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
 
@@ -28,16 +33,45 @@ def on_left_pressed():
     """))
 controller.left.on_event(ControllerButtonEvent.PRESSED, on_left_pressed)
 
+def on_on_zero(status):
+    info.change_life_by(-1)
+    healthbar.value = 100
+statusbars.on_zero(StatusBarKind.health, on_on_zero)
+
 def on_right_pressed():
     hacker.set_image(assets.image("""
         Temporary asset2
     """))
 controller.right.on_event(ControllerButtonEvent.PRESSED, on_right_pressed)
 
+def on_life_zero():
+    game.over(False, effects.melt)
+info.on_life_zero(on_life_zero)
+
+def on_hit_wall(sprite, location):
+    fireball.destroy(effects.ashes, 100)
+    stone.destroy(effects.disintegrate, 500)
+scene.on_hit_wall(SpriteKind.projectile, on_hit_wall)
+
+def on_on_overlap(sprite: Sprite, otherSprite: Sprite):
+    if otherSprite == fireball:
+        healthbar.value += -0.2
+    else:
+        healthbar.value += -0.1
+curScore = 0
+diff = 0
 projectile: Sprite = None
-stone: Sprite = None
+fireball: Sprite = None
 cnt = 0
 hacker: Sprite = None
+stone: Sprite = None
+healthbar: StatusBarSprite = None
+sprites.on_overlap(SpriteKind.player, SpriteKind.projectile, on_on_overlap)
+sprites.on_overlap(SpriteKind.player, SpriteKind.projectile, on_on_overlap)
+sprites.on_overlap(SpriteKind.player, SpriteKind.projectile, on_on_overlap)
+def on_on_overlap2(sprite: any, stone: any):
+    healthbar.value += -0.1
+sprites.on_overlap(SpriteKind.player, SpriteKind.projectile, on_on_overlap)
 scene.set_background_image(img("""
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
         9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -166,28 +200,33 @@ hacker = sprites.create(assets.image("""
     SpriteKind.player)
 hacker.set_position(40, 90)
 controller.move_sprite(hacker, 80, 0)
-hacker.ay = 120
+info.set_life(3)
+info.set_score(1000)
+hacker.ay = 200
 tiles.set_tilemap(tilemap("""
     level1
 """))
 scene.camera_follow_sprite(hacker)
+healthbar = statusbars.create(25, 4, StatusBarKind.health)
+healthbar.set_position(14, 15)
+healthbar.max = 100
 # else:
 # hacker.ay = 0
 # hacker.vy = 0
 
 def on_on_update():
     if hacker.y < 50:
-        hacker.vy = 10
-        hacker.ay = 120
+        hacker.vy = 50
+        hacker.ay = 200
     elif hacker.y <= 90:
-        hacker.ay = 120
+        hacker.ay = 200
 game.on_update(on_on_update)
 
 def on_update_interval():
     global stone
     stone = sprites.create_projectile_from_side(assets.image("""
-        cactus_img
-    """), 0, 55)
+        stone_img
+    """), 0, 45)
     stone.x = hacker.x + 5
 game.on_update_interval(5000, on_update_interval)
 
@@ -197,4 +236,23 @@ def on_update_interval2():
         smartCloud
     """), -19, 0)
     projectile.y = 50
-game.on_update_interval(5000, on_update_interval2)
+game.on_update_interval(2000, on_update_interval2)
+
+def on_update_interval3():
+    global diff, curScore
+    diff = 2 * game.runtime() / 2500
+    curScore = info.score() - diff
+    curScore = max(curScore, 0)
+    info.set_score(curScore)
+game.on_update_interval(3000, on_update_interval3)
+
+def on_update_interval4():
+    global fireball
+    fireball = sprites.create_projectile_from_side(img("""
+            a e 3 . a 7 e 
+                    a 7 e 2 2 . .
+        """),
+        -35,
+        55)
+    fireball.x = hacker.x + 30
+game.on_update_interval(8000, on_update_interval4)
