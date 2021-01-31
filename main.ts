@@ -6,15 +6,17 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         jack.vy = -100
         jumpcount += 2
     }
+    music.playMelody("E G C5 - - - - - ", 416)
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.builtin.brick, function (sprite, location) {
     game.over(true)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
-    coll1.destroy()
+    otherSprite.destroy()
     info.changeLifeBy(-1)
 })
 info.onLifeZero(function () {
+    info.setScore(0)
     game.over(false, effects.confetti)
 })
 scene.onHitWall(SpriteKind.Projectile, function (sprite, location) {
