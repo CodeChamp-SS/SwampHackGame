@@ -46,6 +46,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Coin, function (sprite, otherSpr
     otherSprite.destroy(effects.trail, 50)
     music.baDing.play()
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.FireKind, function (sprite, otherSprite) {
+    healthbar.value += -1.5
+    scene.cameraShake(4, 200)
+})
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     dir2 = 0
     hacker.setImage(assets.image`Temporary asset3`)
@@ -63,7 +67,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
     healthbar.value += -0.2
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`cactus`, function (sprite, location) {
-    healthbar.value += -0.1
+    healthbar.value += -0.3
     scene.cameraShake(4, 200)
 })
 info.onLifeZero(function () {
@@ -72,10 +76,6 @@ info.onLifeZero(function () {
 scene.onHitWall(SpriteKind.Projectile, function (sprite, location) {
     fireball.destroy(effects.ashes, 100)
     stone.destroy(effects.disintegrate, 500)
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`fireTop`, function (sprite, location) {
-    healthbar.value += -1.5
-    scene.cameraShake(4, 200)
 })
 let curScore = 0
 let diff = 0
@@ -88,6 +88,42 @@ let fire: Sprite = null
 let coin: Sprite = null
 let healthbar: StatusBarSprite = null
 let hacker: Sprite = null
+game.setDialogFrame(img`
+    ...cc......................cc....
+    ..c55c..bbbb...bbbbb......c55c...
+    .cb55bcbdddbbbbbdddbbbbbbcb55bc..
+    b555555bbdddb111bdddb11db555555b.
+    bb5555bbdbdb11111bdb1111bb5555bb.
+    cb5555bcddd11111ddd11111cb5555bc.
+    .c5bb5c1111d111d111d111ddc5bb5c..
+    .cbbbbc111111111111111111cbbbbc..
+    ..b11111111111111111111111d111bb.
+    ..b111111111111111111111111d1bdb.
+    ..bb11111111111111111111111dbddb.
+    .bbdb1d11111111111111111111ddddb.
+    .bdddd11111111111111111111d1bdbb.
+    .bddbd11111111111111111111111bb..
+    .bdb1d111111111111111111111111b..
+    .bb111d11111111111111111111111b..
+    ..b11111111111111111111111d111bb.
+    ..b111111111111111111111111d1bdb.
+    ..bb11111111111111111111111dbddb.
+    .bbdb1d11111111111111111111ddddb.
+    .bdddd11111111111111111111d1bdbb.
+    .bddbd11111111111111111111111bb..
+    .bdbb1111111111111111111111111b..
+    .bbbd1111111111111111111111111b..
+    ..bcc111111111111111111111dccdb..
+    ..c55c111d111d111d111d1111c55cb..
+    .cb55bcdd11111ddd11111dddcb55bc..
+    b555555b11111bdb11111bdbb555555b.
+    bb5555bbb111bdddb111bdddbb5555bb.
+    cb5555bcdbbbbbdddbbbbbddcb5555bc.
+    .c5bb5c.bb...bbbbb...bbbbc5bb5c..
+    .cbbbbc..................cbbbbc..
+    .................................
+    `)
+game.showLongText("WELCOME FOLKS !\\n \\n Try your best to take the Lone Ranger to the end :-)\\n \\n Beware of the fire !!", DialogLayout.Full)
 let mangoTree = sprites.create(assets.image`mangoTree`, SpriteKind.board)
 mangoTree.setPosition(80, 312)
 let FinishTree = sprites.create(assets.image`finishTree`, SpriteKind.finish)
@@ -237,9 +273,7 @@ for (let value of tiles.getTilesByType(assets.tile`tileCoin`)) {
     tiles.setTileAt(value, assets.tile`transparency16`)
 }
 for (let value of tiles.getTilesByType(assets.tile`fireTop`)) {
-    fire = sprites.create(img`
-        a e 3 . a 7 e f e 2 c 
-        `, SpriteKind.Fire)
+    fire = sprites.create(assets.image`fireTopimage`, SpriteKind.FireKind)
     animation.runImageAnimation(
     fire,
     assets.animation`fireAnim`,
