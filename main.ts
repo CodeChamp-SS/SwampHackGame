@@ -50,7 +50,6 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     hacker.setImage(assets.image`Temporary asset3`)
 })
 statusbars.onZero(StatusBarKind.Health, function (status) {
-    music.playMelody("C A G E D D C C ", 250)
     info.changeLifeBy(-1)
     healthbar.value = 100
 })
@@ -59,7 +58,7 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     hacker.setImage(assets.image`Temporary asset2`)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`cactus`, function (sprite, location) {
-    healthbar.value += -1
+    healthbar.value += -0.05
     scene.cameraShake(4, 200)
 })
 info.onLifeZero(function () {
@@ -77,7 +76,7 @@ function on_on_overlap (sprite: Sprite, otherSprite: Sprite) {
     }
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`fireTop`, function (sprite, location) {
-    healthbar.value += -20
+    healthbar.value += -1.5
     scene.cameraShake(4, 200)
 })
 let curScore = 0
@@ -92,7 +91,7 @@ let hacker: Sprite = null
 let mangoTree = sprites.create(assets.image`mangoTree`, SpriteKind.board)
 mangoTree.setPosition(80, 280)
 let FinishTree = sprites.create(assets.image`finishTree`, SpriteKind.finish)
-FinishTree.setPosition(1720, 185)
+FinishTree.setPosition(3420, 280)
 let healthbar : StatusBarSprite = null
 let stone : Sprite = null
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, on_on_overlap)
@@ -378,17 +377,6 @@ for (let value of tiles.getTilesByType(assets.tile`tileLife`)) {
     tiles.placeOnTile(lifeBonus, value)
     tiles.setTileAt(value, assets.tile`transparency16`)
 }
-// else:
-// hacker.ay = 0
-// hacker.vy = 0
-game.onUpdate(function () {
-    if (hacker.y < 50) {
-        hacker.vy = 50
-        hacker.ay = 200
-    } else if (hacker.y <= 90) {
-        hacker.ay = 200
-    }
-})
 game.onUpdateInterval(5000, function () {
     stone = sprites.createProjectileFromSide(assets.image`stone_img`, 0, 45)
     stone.x = hacker.x + 5
@@ -398,7 +386,7 @@ game.onUpdateInterval(2000, function () {
     projectile.y = 50
 })
 game.onUpdateInterval(3000, function () {
-    diff = 2 * game.runtime() / 2500
+    diff = 2 * game.runtime() / 5500
     curScore = info.score() - diff
     curScore = Math.max(curScore, 0)
     info.setScore(curScore)
