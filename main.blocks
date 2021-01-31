@@ -1,1 +1,0 @@
-<xml xmlns="https://developers.google.com/blockly/xml"><block type="pxt-on-start" id="jklA:2+%8I!;1ybm8^#j" x="0" y="0"/><block type="keyonevent" id="+X5IMjXuG:wHI*:u7D:`" x="240" y="60"><field name="button">controller.A</field><field name="event">ControllerButtonEvent.Pressed</field></block><block type="gameupdate" id="M}26)Y+Dr,%U2}-bj^Zp" x="240" y="280"/></xml>
