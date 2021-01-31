@@ -3,7 +3,12 @@ namespace SpriteKind {
     export const StoneKind = SpriteKind.create()
     export const board = SpriteKind.create()
     export const Coin = SpriteKind.create()
+    export const LifeBonus = SpriteKind.create()
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.LifeBonus, function (sprite, otherSprite) {
+    info.changeLifeBy(1)
+    otherSprite.destroy(effects.trail, 50)
+})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (hacker.vy == 0) {
         hacker.vy = -135
@@ -27,6 +32,10 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         false
         )
     }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Coin, function (sprite, otherSprite) {
+    info.changeScoreBy(10)
+    otherSprite.destroy(effects.trail, 50)
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     hacker.setImage(assets.image`Temporary asset3`)
@@ -61,6 +70,7 @@ let diff = 0
 let projectile: Sprite = null
 let fireball: Sprite = null
 let cnt = 0
+let lifeBonus: Sprite = null
 let coin: Sprite = null
 let hacker: Sprite = null
 let mangoTree = sprites.create(assets.image`mangoTree`, SpriteKind.board)
@@ -233,6 +243,17 @@ for (let value of tiles.getTilesByType(assets.tile`tileCoin`)) {
     true
     )
     tiles.placeOnTile(coin, value)
+    tiles.setTileAt(value, assets.tile`transparency16`)
+}
+for (let value of tiles.getTilesByType(assets.tile`tileLife`)) {
+    lifeBonus = sprites.create(assets.image`lifeBonus`, SpriteKind.LifeBonus)
+    animation.runImageAnimation(
+    lifeBonus,
+    assets.animation`lifeBonusAnima`,
+    50,
+    true
+    )
+    tiles.placeOnTile(lifeBonus, value)
     tiles.setTileAt(value, assets.tile`transparency16`)
 }
 // else:
