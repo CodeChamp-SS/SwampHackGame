@@ -6,7 +6,6 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         jack.vy = -100
         jumpcount += 2
     }
-    music.playMelody("E G C5 - - - - - ", 416)
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.builtin.brick, function (sprite, location) {
     game.over(true)
