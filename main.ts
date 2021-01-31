@@ -35,7 +35,7 @@ info.setLife(3)
 jack.ay = 250
 scene.cameraFollowSprite(jack)
 statusbar = statusbars.create(20, 4, StatusBarKind.Energy)
-statusbar.value = 100
+statusbar.max = 100
 statusbar.positionDirection(CollisionDirection.Left)
 statusbar.setOffsetPadding(-40, 0)
 let test = sprites.allOfKind(SpriteKind.Player)
@@ -49,7 +49,7 @@ game.onUpdate(function () {
 })
 game.onUpdateInterval(2000, function () {
     if (game.runtime() > 3000) {
-        coll1 = sprites.createProjectileFromSide(assets.image`image5`, -39, 50)
+        coll1 = sprites.createProjectileFromSide(assets.image`image8`, -39, 50)
         coll1.setPosition(jack.x + 50, jack.y - 50)
     }
 })
