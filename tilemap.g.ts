@@ -7,8 +7,6 @@ namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const tile2 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
-    export const tile3 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
     export const tile4 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile5 = image.ofBuffer(hex``);
@@ -16,6 +14,8 @@ namespace myTiles {
     export const tile6 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile7 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile8 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -91,7 +91,7 @@ namespace myTiles {
 .....................................................................................................222......
 ..............................................................................................................
 ..............................................................................................................
-...........2...............2...............2...............2...............2...............2...............2..
+..............................................................................................................
 22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
 ..............................................................................................................
 `, [myTiles.transparency16,sprites.castle.tilePath1,sprites.castle.tilePath2,sprites.castle.saplingOak,myTiles.tile1,myTiles.tile5,myTiles.tile6,myTiles.tile7], TileScale.Sixteen);
@@ -106,7 +106,6 @@ namespace myTiles {
             case "tile1":return tile1;
             case "tile0":
             case "tile2":return tile2;
-            case "tile3":return tile3;
             case "tile5":
             case "tile4":return tile4;
             case "cactus":
@@ -115,6 +114,8 @@ namespace myTiles {
             case "tile6":return tile6;
             case "tileCoinRepl":
             case "tile7":return tile7;
+            case "tile9":
+            case "tile8":return tile8;
         }
         return null;
     })

@@ -1,5 +1,6 @@
 namespace SpriteKind {
     export const Coin = SpriteKind.create()
+    export const board = SpriteKind.create()
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (hacker.vy == 0) {
@@ -162,6 +163,8 @@ scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     `)
+let mangoTree = sprites.create(assets.image`mangoTree`, SpriteKind.board)
+mangoTree.setPosition(80, 185)
 hacker = sprites.create(assets.image`Temporary asset2`, SpriteKind.Player)
 hacker.setPosition(40, 90)
 controller.moveSprite(hacker, 80, 0)
