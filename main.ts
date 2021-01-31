@@ -4,6 +4,7 @@ namespace SpriteKind {
     export const board = SpriteKind.create()
     export const Coin = SpriteKind.create()
     export const LifeBonus = SpriteKind.create()
+    export const finish = SpriteKind.create()
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.LifeBonus, function (sprite, otherSprite) {
     info.changeLifeBy(1)
@@ -32,6 +33,9 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         false
         )
     }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.finish, function (sprite, otherSprite) {
+    game.over(true, effects.confetti)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Coin, function (sprite, otherSprite) {
     info.changeScoreBy(10)
@@ -75,8 +79,8 @@ let coin: Sprite = null
 let hacker: Sprite = null
 let mangoTree = sprites.create(assets.image`mangoTree`, SpriteKind.board)
 mangoTree.setPosition(80, 185)
-let FinishTree = sprites.create(assets.image`finish Tree1`, SpriteKind.board)
-FinishTree.setPosition(2000, 185)
+let FinishTree = sprites.create(assets.image`finish Tree1`, SpriteKind.finish)
+FinishTree.setPosition(1720, 185)
 let healthbar : StatusBarSprite = null
 let stone : Sprite = null
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, on_on_overlap)
