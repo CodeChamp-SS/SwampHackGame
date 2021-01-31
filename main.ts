@@ -170,6 +170,12 @@ tiles.setTilemap(tilemap`level1`)
 scene.cameraFollowSprite(hacker)
 for (let value of tiles.getTilesByType(assets.tile`tileCoinRepl`)) {
     coin = sprites.create(assets.image`coin`, SpriteKind.Coin)
+    animation.runImageAnimation(
+    coin,
+    assets.animation`coinAnima`,
+    200,
+    true
+    )
     tiles.placeOnTile(coin, value)
     tiles.setTileAt(value, assets.tile`transparency16`)
 }
