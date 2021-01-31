@@ -8,16 +8,17 @@ def on_up_pressed():
         jumpcount += 2
 controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
 
-def on_overlap_tile(sprite, location):
-    game.over(True)
-scene.on_overlap_tile(SpriteKind.player, sprites.builtin.brick, on_overlap_tile)
-
-def on_on_overlap(sprite, otherSprite):
+def on_on_overlap(sprite, coll1):
     coll1.destroy()
     info.change_life_by(-1)
 sprites.on_overlap(SpriteKind.player, SpriteKind.projectile, on_on_overlap)
 
+def on_overlap_tile(sprite, location):
+    game.over(True)
+scene.on_overlap_tile(SpriteKind.player, sprites.builtin.brick, on_overlap_tile)
+
 def on_life_zero():
+    info.set_score(0)
     game.over(False, effects.confetti)
 info.on_life_zero(on_life_zero)
 
@@ -32,7 +33,7 @@ scene.set_background_color(9)
 tiles.set_tilemap(tilemap("""
     level4
 """))
-info.set_score(0)
+info.set_score(1000)
 jack = sprites.create(assets.image("""
     image6
 """), SpriteKind.player)
@@ -40,6 +41,10 @@ controller.move_sprite(jack, 100, 0)
 info.set_life(3)
 jack.ay = 250
 scene.camera_follow_sprite(jack)
+statusbar = statusbars.create(20, 4, StatusBarKind.energy)
+statusbar.value = 10
+statusbar.position_direction(CollisionDirection.LEFT)
+statusbar.set_offset_padding(-40, 0)
 test = sprites.all_of_kind(SpriteKind.player)
 info.set_score(1000)
 
@@ -65,4 +70,5 @@ game.on_update_interval(2000, on_update_interval)
 
 def on_update_interval2():
     info.set_score(info.score() - 5)
+    game.set_dialog_text_color(0)
 game.on_update_interval(1000, on_update_interval2)

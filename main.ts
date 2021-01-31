@@ -7,12 +7,13 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         jumpcount += 2
     }
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, coll1) {
+    coll1.destroy()
+    info.changeLifeBy(-1)
+    statusbar.value += -30
+})
 scene.onOverlapTile(SpriteKind.Player, sprites.builtin.brick, function (sprite, location) {
     game.over(true)
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
-    otherSprite.destroy()
-    info.changeLifeBy(-1)
 })
 info.onLifeZero(function () {
     info.setScore(0)
@@ -23,6 +24,7 @@ scene.onHitWall(SpriteKind.Projectile, function (sprite, location) {
 })
 let coll1: Sprite = null
 let jumpcount = 0
+let statusbar: StatusBarSprite = null
 let jack: Sprite = null
 scene.setBackgroundColor(9)
 tiles.setTilemap(tilemap`level4`)
@@ -32,8 +34,8 @@ controller.moveSprite(jack, 100, 0)
 info.setLife(3)
 jack.ay = 250
 scene.cameraFollowSprite(jack)
-let statusbar = statusbars.create(20, 4, StatusBarKind.Energy)
-statusbar.value = 10
+statusbar = statusbars.create(20, 4, StatusBarKind.Energy)
+statusbar.value = 100
 statusbar.positionDirection(CollisionDirection.Left)
 statusbar.setOffsetPadding(-40, 0)
 let test = sprites.allOfKind(SpriteKind.Player)
@@ -53,4 +55,5 @@ game.onUpdateInterval(2000, function () {
 })
 game.onUpdateInterval(1000, function () {
     info.setScore(info.score() - 5)
+    game.setDialogTextColor(0)
 })
