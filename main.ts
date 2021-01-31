@@ -75,6 +75,8 @@ let coin: Sprite = null
 let hacker: Sprite = null
 let mangoTree = sprites.create(assets.image`mangoTree`, SpriteKind.board)
 mangoTree.setPosition(80, 185)
+let FinishTree = sprites.create(assets.image`finish Tree1`, SpriteKind.board)
+FinishTree.setPosition(2000, 185)
 let healthbar : StatusBarSprite = null
 let stone : Sprite = null
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, on_on_overlap)
