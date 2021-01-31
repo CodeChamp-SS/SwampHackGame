@@ -10,9 +10,48 @@ controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
 
 def on_on_overlap(sprite, coll1):
     coll1.destroy()
-    info.change_life_by(-1)
     statusbar.value += -30
 sprites.on_overlap(SpriteKind.player, SpriteKind.projectile, on_on_overlap)
+
+def on_a_pressed():
+    game.set_dialog_frame(img("""
+        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+                2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+                2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+                2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+                2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+                2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+                2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+                2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+                2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+                2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+                2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+                2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+                2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+                2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+                2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    """))
+    game.set_dialog_text_color(5)
+    game.set_dialog_cursor(img("""
+        ..............................
+                ..............................
+                ..............................
+                777777777777777777777777......
+                7......................7......
+                7.111.111.1111.111.111.7......
+                7.1...1.1.1..1.1...1...7......
+                7.111.111.1..1.1...111.7......
+                7...1.1...1111.1...1...7......
+                7.111.1...1..1.111.111.7......
+                7......................7......
+                777777777777777777777777......
+                ..............................
+                ..............................
+                ..............................
+    """))
+    game.show_long_text("Welcome To The world of retro.\\n Try to win as fast as possible.\\n press space to START GAME",
+        DialogLayout.CENTER)
+controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
 
 def on_overlap_tile(sprite, location):
     game.over(True)
@@ -31,43 +70,6 @@ coll1: Sprite = None
 jumpcount = 0
 statusbar: StatusBarSprite = None
 jack: Sprite = None
-game.set_dialog_frame(img("""
-    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-"""))
-game.set_dialog_text_color(5)
-game.set_dialog_cursor(img("""
-    ..............................
-        ..............................
-        ..............................
-        777777777777777777777777......
-        7......................7......
-        7.111.111.1111.111.111.7......
-        7.1...1.1.1..1.1...1...7......
-        7.111.111.1..1.1...111.7......
-        7...1.1...1111.1...1...7......
-        7.111.1...1..1.111.111.7......
-        7......................7......
-        777777777777777777777777......
-        ..............................
-        ..............................
-        ..............................
-"""))
-game.show_long_text("Welcome To The world of retro.\\n Try to win as fast as possible.\\n press space to START GAME",
-    DialogLayout.CENTER)
 scene.set_background_color(9)
 tiles.set_tilemap(tilemap("""
     level4
@@ -97,6 +99,10 @@ def on_on_update():
             image7
         """))
 game.on_update(on_on_update)
+
+def on_on_update2():
+    pass
+game.on_update(on_on_update2)
 
 def on_update_interval():
     global coll1

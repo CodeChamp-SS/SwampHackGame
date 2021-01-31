@@ -9,7 +9,6 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, coll1) {
     coll1.destroy()
-    info.changeLifeBy(-1)
     statusbar.value += -30
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -84,6 +83,9 @@ game.onUpdate(function () {
     } else if (jack.vx < 0) {
         jack.setImage(assets.image`image7`)
     }
+})
+game.onUpdate(function () {
+	
 })
 game.onUpdateInterval(2000, function () {
     if (game.runtime() > 3000) {
